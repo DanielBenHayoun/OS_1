@@ -9,28 +9,28 @@ int sys_enable_policy(pid_t pid, int size, int password){
 	//parameters tests
 	if(pid<0){
 		res = -ESRCH;
-		printk("bad pid %d error_num %d ",pid , res);
+		printk("bad pid %d error_num %d\n",pid , res);
 		return res;
 	}
 	task_t* task = find_task_by_pid(pid);//pointer to task
 	if(!task){
 		res = -ESRCH;
-		printk("this pid->%d does not belong to any task error_num %d" , pid , res);
+		printk("this pid->%d does not belong to any task error_num %d\n" , pid , res);
 		return res;
 	}
 	if(password != 234123){
 		res = -EINVAL;
-		printk("wrong password -> %d error_num %d" , password,res);
+		printk("wrong password -> %d error_num %d\n" , password,res);
 		return res;
 	}
 	if(task->feature_status == 1){
 		res = -EINVAL;
-		printk("feature_status is already on error_num %d" , res);
+		printk("feature_status is already on error_num %d\n" , res);
 		return res;
 	}
 	if(size<0){
 		res = -EINVAL;
-		printk("bad size input size->%d " ,size);
+		printk("bad size input size->%d\n" ,size);
 		return res;
 	}
 	task->log_array = kmalloc(sizeof(*(task->log_array))*size,GFP_KERNEL);
