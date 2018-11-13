@@ -575,7 +575,7 @@ extern struct exec_domain	default_exec_domain;
 	log_array: NULL,					\
 	feature_status: 0,			\
 	size_log_array: -1,     		\
-	Num_Of_Error: 0, 			\
+	num_of_error: 0 			\		
 }
 
 
