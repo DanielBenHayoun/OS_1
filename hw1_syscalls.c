@@ -73,9 +73,28 @@ int sys_disable_policy(pid_t pid , int password){
 	
 }
 
-int sys_get_process_log(pid_t pid,int size,struct forbidden_activity_info* user_mem){
+int set_process_capabilities(pid_t pid,int new_level,int password){
 	int res;
-	
+	if(new_level != 0 && new_level != 1 && new_level != 2){
+		res = -EINVAL;
+		printk("the new level->%d is incorrect" , new_level);
+		return res;
+	}
+	if(password != 234123){
+		res = -EINVAL;
+		printk("wrong password -> %d error_num %d\n" , password,res);
+		return res;
+	}
+	if(task->feature_status == 0){
+		res = -EINVAL;
+		printk("feature_status is off error_num %d\n" , res);
+	if(size > task->num_of_error || size < 0 || task->feature_status == 0) {
+		res=-EINVAL;
+		return res;
+	}
+    
+ int sys_get_process_log(pid_t pid,int size,struct forbidden_activity_info* user_mem){
+	int res;
 	if(pid<0){
 		res = -ESRCH;
 		return res;
@@ -85,11 +104,6 @@ int sys_get_process_log(pid_t pid,int size,struct forbidden_activity_info* user_
 		res = -ESRCH;
 		return res;
 	}
-	if(size > task->num_of_error || size < 0 || task->feature_status == 0) {
-		res=-EINVAL;
-		return res;
-	}
-	
 	res = 0;
 	return res;
 
