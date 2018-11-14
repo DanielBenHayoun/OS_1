@@ -27,7 +27,7 @@ int main() {
   set_process_capabilities(getpid(),3,234123); // FAIL
   
   
-  struct forbidden_activity_info* log = malloc(sizeof(struct forbidden_activity_info)*10);
+  forbidden_activity_info* log = malloc(sizeof(forbidden_activity_info)*10);
   get_process_log(getpid(),0,log); // FAIL
   enable_policy(getpid(),10,234123);
   get_process_log(getpid(),0,log);
