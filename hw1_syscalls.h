@@ -57,3 +57,26 @@ int set_process_capabilities(pid_t pid,int new_level,int password){
 	}
 	return res;
 }
+int get_process_log(pid_t pid,int size,struct forbidden_activity_info* user_mem){
+	
+	unsigned int res;
+	__asm__ (
+	    "int $0x80;"
+		: "=a" (res)
+		: "0" (245) ,"b" (pid) ,"c" (size) , "d" (user_mem)
+		: "memory"
+	);
+	
+	if((res)<0){
+		errno = -(res);
+		return -1;
+	}
+	
+	return res;
+	
+	
+	
+}
+
+
+
