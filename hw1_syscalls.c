@@ -73,6 +73,7 @@ int sys_disable_policy(pid_t pid , int password){
 }
 
 int set_process_capabilities(pid_t pid,int new_level,int password){
+	int res;
 	if(pid<0){
 		res = -ESRCH;
 		printk("bad pid %d error_num %d\n",pid , res);
@@ -87,7 +88,7 @@ int set_process_capabilities(pid_t pid,int new_level,int password){
 	}
 	if(new_level != 0 && new_level != 1 && new_level != 2){
 		res = -EINVAL;
-		printk("the level->%d is incorrect" , level);
+		printk("the new level->%d is incorrect" , new_level);
 		return res;
 	}
 	if(password != 234123){
