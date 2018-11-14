@@ -650,8 +650,11 @@ ENTRY(sys_call_table)
 	.long SYMBOL_NAME(sys_sched_setaffinity)
 	.long SYMBOL_NAME(sys_sched_getaffinity)
 	.long SYMBOL_NAME(sys_enable_policy) /* hw1 sys_enable_policy 243 */
-	.long SYMBOL_NAME(sys_disable_policy) /* hw1 sys_disable_policy 244 */
+
+	.long SYMBOL_NAME(sys_disable_policy) /* hw1 sys_enable_policy 244 */
 	.long SYMBOL_NAME(sys_set_process_capabilities) /* hw1 sys_set_process_capabilities 245 */
+	.long SYMBOL_NAME(sys_get_process_log) /* hw1 sys_enable_policy 246 */
+
 
 	.rept NR_syscalls-(.-sys_call_table)/4
 		.long SYMBOL_NAME(sys_ni_syscall)
