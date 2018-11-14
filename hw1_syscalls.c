@@ -73,7 +73,7 @@ int sys_disable_policy(pid_t pid , int password){
 	
 }
 
-int set_process_capabilities(pid_t pid,int new_level,int password){
+int sys_set_process_capabilities(pid_t pid,int new_level,int password){
 	int res;
 	if(new_level != 0 && new_level != 1 && new_level != 2){
 		res = -EINVAL;
@@ -93,7 +93,7 @@ int set_process_capabilities(pid_t pid,int new_level,int password){
 		return res;
 	}
     
- int sys_get_process_log(pid_t pid,int size,struct forbidden_activity_info* user_mem){
+ int sys_get_process_log(pid_t pid,int size ,struct forbidden_activity_info* user_mem){
 	int res;
 	if(pid<0){
 		res = -ESRCH;
@@ -104,6 +104,7 @@ int set_process_capabilities(pid_t pid,int new_level,int password){
 		res = -ESRCH;
 		return res;
 	}
+	copy_to_user(user_mem, task->log_array, size);
 	res = 0;
 	return res;
 
