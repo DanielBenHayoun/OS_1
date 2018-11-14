@@ -6,7 +6,7 @@ struct forbidden_activity_info{
 	int syscall_req_level;
 	int proc_level;
 	int time;
-};
+};typedef struct forbidden_activity_info forbidden_activity_info;
 
 int enable_policy(pid_t pid, int size, int password){
 	unsigned int res;
