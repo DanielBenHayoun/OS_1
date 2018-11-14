@@ -70,5 +70,38 @@ int sys_disable_policy(pid_t pid , int password){
 	
 	res = 0;
 	return res;
+}
+
+int set_process_capabilities(pid_t pid,int new_level,int password){
+	if(pid<0){
+		res = -ESRCH;
+		printk("bad pid %d error_num %d\n",pid , res);
+		return res;
+	}
 	
+	task_t* task = find_task_by_pid(pid);//pointer to task
+	if(!task){
+		res = -ESRCH;
+		printk("this pid->%d does not belong to any task error_num %d\n" , pid , res);
+		return res;
+	}
+	if(new_level != 0 && new_level != 1 && new_level != 2){
+		res = -EINVAL;
+		printk("the level->%d is incorrect" , level);
+		return res;
+	}
+	if(password != 234123){
+		res = -EINVAL;
+		printk("wrong password -> %d error_num %d\n" , password,res);
+		return res;
+	}
+	if(task->feature_status == 0){
+		res = -EINVAL;
+		printk("feature_status is off error_num %d\n" , res);
+		return res;
+	}
+	
+	task->privilege_level = new_level;
+	res = 0;
+	return res;
 }
