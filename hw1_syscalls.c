@@ -105,6 +105,14 @@ int sys_set_process_capabilities(pid_t pid,int new_level,int password){
 		return res;
 	}
 	copy_to_user(user_mem, task->log_array, size);
+	forbidden_activity_info* new_log_array = kmalloc(sizeof(*(task->log_array))*(task->size_log_array),GFP_KERNEL);
+	int j=0;
+	for(int i=size; i<task->size_log_array;i++){
+	new_log_array[j]=task->log_array[i];
+	j++;
+	}
+	kfree(task->log_array);
+	task->log_array=new_log_array;
 	res = 0;
 	return res;
 
