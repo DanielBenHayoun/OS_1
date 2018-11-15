@@ -9,7 +9,7 @@ struct forbidden_activity_info{
 };typedef struct forbidden_activity_info forbidden_activity_info;
 
 int enable_policy(pid_t pid, int size, int password){
-	unsigned int res;
+	 int res;
 	__asm__ (
 	    "int $0x80;"
 		: "=a" (res)
@@ -26,7 +26,7 @@ int enable_policy(pid_t pid, int size, int password){
 }
 
 int disable_policy(pid_t pid , int password){
-	unsigned int res;
+	  int res;
 	__asm__ (
 	    "int $0x80;"
 		: "=a" (res)
@@ -43,7 +43,7 @@ int disable_policy(pid_t pid , int password){
 }
 
 int set_process_capabilities(pid_t pid,int new_level,int password){
-	unsigned int res;
+	  int res;
 	__asm__ (
 	    "int $0x80;"
 		: "=a" (res)
@@ -59,7 +59,7 @@ int set_process_capabilities(pid_t pid,int new_level,int password){
 }
 int get_process_log(pid_t pid,int size,struct forbidden_activity_info* user_mem){
 	
-	unsigned int res;
+	  int res;
 	__asm__ (
 	    "int $0x80;"
 		: "=a" (res)
