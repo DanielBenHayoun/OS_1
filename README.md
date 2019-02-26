@@ -12,7 +12,7 @@ such that only a process with an appropriate privilege level will be able to inv
 we will create a logging service that records forbidden activities of processes in the OS.
 ### The policy is defined as follows:
 
-● Turning On The Policy Feature: By default, all processes will not be affected by this
+*Turning On The Policy Feature: By default, all processes will not be affected by this
 feature. we will define a system call which gets the PID of a process and turns on the
 feature for this process. If the feature is turned off for a process, then the process
 executes as normal and is not affected by anything in this homework exercise,
